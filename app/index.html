@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="非公式・非営利のスカイメイト路線・時刻表検索デモ" />
+  <title>Skymate Finder — 非公式路線検索</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Skymate Finder ホーム">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>
+          <strong>Skymate Finder</strong>
+          <small>非公式・非営利ファンサイト</small>
+        </span>
+      </a>
+      <a class="header-link" href="#about">このサイトについて</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">行き先未定でも、出発地から探せる</p>
+        <h1>今日、どこへ飛ぶ？</h1>
+        <p class="lead">出発空港と日付だけで、路線・時刻表・スカイメイト運賃の候補を横断検索します。</p>
+      </div>
+      <div class="demo-banner" role="note">
+        <strong>動作確認用デモ</strong>
+        <span>現在のデータはすべてサンプルです。実際の便・運賃・空席ではありません。</span>
+      </div>
+    </section>
+
+    <section class="search-shell" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">SEARCH</p>
+          <h2 id="search-title">路線・時刻表を検索</h2>
+        </div>
+        <div class="quick-dates" aria-label="日付ショートカット">
+          <button type="button" data-date-offset="0">今日</button>
+          <button type="button" data-date-offset="1">明日</button>
+        </div>
+      </div>
+
+      <form id="search-form" class="search-form">
+        <label>
+          <span>出発空港 <b>必須</b></span>
+          <select id="origin" name="origin" required></select>
+        </label>
+        <label>
+          <span>到着空港</span>
+          <select id="destination" name="destination">
+            <option value="">すべての行き先</option>
+          </select>
+        </label>
+        <label>
+          <span>搭乗日 <b>必須</b></span>
+          <input id="flight-date" name="date" type="date" required />
+        </label>
+        <label>
+          <span>出発時間帯</span>
+          <select id="departure-period" name="departure_period">
+            <option value="all">終日</option>
+            <option value="morning">午前（5〜12時）</option>
+            <option value="afternoon">午後（12〜17時）</option>
+            <option value="evening">夕方（17〜20時）</option>
+            <option value="night">夜（20時以降）</option>
+          </select>
+        </label>
+        <label>
+          <span>予算上限</span>
+          <div class="input-suffix">
+            <input id="budget" name="budget" type="number" min="0" step="500" placeholder="例 12000" />
+            <span>円</span>
+          </div>
+        </label>
+        <label>
+          <span>空席表示</span>
+          <select id="availability-filter" name="availability_filter">
+            <option value="all">すべて</option>
+            <option value="exact">当日実在庫のみ</option>
+            <option value="reference">一般席参考あり</option>
+            <option value="high">利用見込み「高」</option>
+            <option value="known">未確認を除外</option>
+          </select>
+        </label>
+        <label>
+          <span>並び順</span>
+          <select id="sort" name="sort">
+            <option value="departure">出発時刻順</option>
+            <option value="price">価格が安い順</option>
+            <option value="duration">所要時間順</option>
+            <option value="destination">行き先順</option>
+            <option value="availability">利用見込み順</option>
+          </select>
+        </label>
+        <button class="primary-button" type="submit">
+          <span>検索する</span><span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </section>
+
+    <section class="results-section" aria-live="polite">
+      <div class="results-toolbar">
+        <div>
+          <p class="kicker">RESULTS</p>
+          <h2 id="results-title">検索結果</h2>
+        </div>
+        <p id="dataset-meta" class="dataset-meta"></p>
+      </div>
+      <div id="loading" class="state-card" hidden>検索しています…</div>
+      <div id="error" class="state-card error" hidden></div>
+      <div id="empty" class="state-card" hidden>条件に合う便がありません。日付や時間帯を変更してください。</div>
+      <div id="results" class="results-grid"></div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div>
+        <p class="kicker">ABOUT</p>
+        <h2>「空席」の意味を混ぜない</h2>
+      </div>
+      <div class="about-grid">
+        <article><span class="legend exact">実在庫</span><h3>当日スカイメイト空席</h3><p>対象運賃を直接確認できる、許可済みデータがある場合だけ表示します。</p></article>
+        <article><span class="legend reference">参考</span><h3>一般席参考</h3><p>一般席の状態であり、スカイメイト枠の販売可否を保証しません。</p></article>
+        <article><span class="legend prediction">予測</span><h3>利用見込み</h3><p>便数・曜日・時間帯等から算出した説明可能な参考スコアです。</p></article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog" class="detail-dialog">
+    <button id="dialog-close" class="dialog-close" aria-label="閉じる">×</button>
+    <div id="dialog-content"></div>
+  </dialog>
+
+  <footer>
+    <p><strong>非公式サイト：</strong>本サイトはJALおよびJALグループとは関係ありません。表示内容は参考情報です。</p>
+    <p>最新の空席・運賃・運航状況は、必ずJAL公式サイトでご確認ください。</p>
+  </footer>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

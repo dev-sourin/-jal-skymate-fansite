@@ -1,0 +1,6 @@
+flight_no,flight_date,cabin_class,fare_product,status,source_type,source_label,observed_at,expires_at,note
+JL-D101,TODAY,ECONOMY,SKYMATE,AVAILABLE,EXACT_SKYMATE,正式接続を想定したデモデータ,TODAY@00:05,TODAY@23:59,本番では許可済みAPI等に差し替え
+JL-D117,TODAY,ECONOMY,,AVAILABLE_MANY,GENERAL_CURRENT,一般席参考のデモデータ,TODAY@01:00,TODAY@23:59,スカイメイト枠ではない
+JL-D501,TODAY,ECONOMY,SKYMATE,SOLD_OUT,EXACT_SKYMATE,正式接続を想定したデモデータ,TODAY@00:08,TODAY@23:59,本番では許可済みAPI等に差し替え
+JL-D303,TOMORROW,ECONOMY,,AVAILABLE_MANY,GENERAL_D1,前日一般席参考のデモデータ,TODAY@01:10,TOMORROW@23:59,翌日の販売を保証しない
+JL-D901,TOMORROW,ECONOMY,,AVAILABLE_FEW,GENERAL_D1,前日一般席参考のデモデータ,TODAY@01:15,TOMORROW@23:59,翌日の販売を保証しない

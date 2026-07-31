@@ -1,0 +1,165 @@
+:root {
+  --ink: #142033;
+  --muted: #667085;
+  --line: #d9dee8;
+  --surface: #ffffff;
+  --soft: #f4f6fa;
+  --navy: #102847;
+  --accent: #d72c3f;
+  --accent-dark: #ae1f30;
+  --exact: #126c4b;
+  --reference: #8a5a00;
+  --prediction: #4255a5;
+  --unknown: #687080;
+  --shadow: 0 18px 50px rgba(16, 40, 71, 0.10);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: linear-gradient(180deg, #f7f8fb 0, #fff 360px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+}
+button, input, select { font: inherit; }
+button, select { cursor: pointer; }
+a { color: inherit; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid rgba(217, 222, 232, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+}
+.header-inner {
+  width: min(1180px, calc(100% - 32px));
+  min-height: 70px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-mark {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border-radius: 12px; background: var(--navy); color: #fff; font-weight: 800;
+}
+.brand strong, .brand small { display: block; }
+.brand small { color: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.header-link { font-size: 14px; text-decoration: none; color: var(--muted); }
+
+main { width: min(1180px, calc(100% - 32px)); margin: auto; }
+.hero { padding: 72px 0 36px; display: grid; gap: 30px; grid-template-columns: 1.35fr .65fr; align-items: end; }
+.eyebrow, .kicker { margin: 0 0 8px; color: var(--accent); font-weight: 800; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+h1 { margin: 0; font-size: clamp(44px, 8vw, 86px); line-height: .98; letter-spacing: -.055em; }
+.lead { max-width: 700px; margin: 24px 0 0; color: var(--muted); font-size: 18px; }
+.demo-banner {
+  padding: 20px; border-radius: 18px; color: #fff;
+  background: linear-gradient(135deg, var(--navy), #234a78);
+  box-shadow: var(--shadow);
+}
+.demo-banner strong, .demo-banner span { display: block; }
+.demo-banner span { margin-top: 5px; color: #dce7f5; font-size: 13px; }
+
+.search-shell { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: var(--shadow); }
+.section-heading, .results-toolbar { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+h2 { margin: 0; font-size: 28px; letter-spacing: -.03em; }
+.quick-dates { display: flex; gap: 8px; }
+.quick-dates button { border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 7px 14px; color: var(--muted); }
+.quick-dates button:hover { border-color: var(--navy); color: var(--navy); }
+.search-form { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 24px; align-items: end; }
+.search-form label > span { display: block; margin: 0 0 7px; color: #3b4658; font-size: 13px; font-weight: 700; }
+.search-form label b { color: var(--accent); font-size: 10px; }
+input, select {
+  width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px;
+  background: #fff; padding: 0 13px; color: var(--ink); outline: none;
+}
+input:focus, select:focus { border-color: #6d86aa; box-shadow: 0 0 0 3px rgba(16,40,71,.08); }
+.input-suffix { position: relative; }
+.input-suffix span { position: absolute; right: 13px; top: 12px; color: var(--muted); }
+.input-suffix input { padding-right: 42px; }
+.primary-button {
+  min-height: 50px; border: 0; border-radius: 13px; padding: 0 20px;
+  background: var(--accent); color: #fff; display: flex; align-items: center;
+  justify-content: space-between; font-weight: 800;
+}
+.primary-button:hover { background: var(--accent-dark); }
+
+.results-section { padding: 68px 0; }
+.dataset-meta { color: var(--muted); font-size: 12px; text-align: right; }
+.results-grid { display: grid; gap: 16px; margin-top: 24px; }
+.flight-card {
+  display: grid; grid-template-columns: 1.15fr .75fr .8fr auto; gap: 22px; align-items: center;
+  background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 22px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.flight-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.route-line { display: flex; align-items: center; gap: 12px; }
+.airport-code { font-size: 30px; font-weight: 900; letter-spacing: -.03em; }
+.route-arrow { color: var(--muted); }
+.destination-name { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.flight-time { display: flex; gap: 12px; align-items: center; }
+.flight-time strong { font-size: 22px; }
+.flight-meta { margin-top: 5px; color: var(--muted); font-size: 12px; }
+.fare-stack { display: grid; gap: 8px; }
+.fare-row { display: flex; justify-content: space-between; gap: 18px; font-size: 13px; }
+.fare-row strong { font-size: 16px; white-space: nowrap; }
+.availability-box { min-width: 190px; }
+.availability-tag, .legend {
+  display: inline-flex; align-items: center; min-height: 26px; padding: 3px 9px;
+  border-radius: 999px; font-weight: 800; font-size: 11px;
+}
+.availability-tag.exact, .legend.exact { color: var(--exact); background: #e7f4ee; }
+.availability-tag.reference, .legend.reference { color: var(--reference); background: #fff3d7; }
+.availability-tag.prediction, .legend.prediction { color: var(--prediction); background: #edf0ff; }
+.availability-tag.unknown, .legend.unknown { color: var(--unknown); background: #eef0f3; }
+.availability-status { display: block; margin-top: 7px; font-size: 18px; font-weight: 900; }
+.availability-note { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.detail-button { border: 1px solid var(--line); background: #fff; border-radius: 12px; min-height: 43px; padding: 0 15px; font-weight: 700; white-space: nowrap; }
+.detail-button:hover { border-color: var(--navy); }
+.state-card { margin-top: 24px; border: 1px dashed var(--line); border-radius: 18px; padding: 40px; text-align: center; color: var(--muted); background: #fff; }
+.state-card.error { color: var(--accent); border-color: #efb7bd; }
+
+.about-section { margin-bottom: 70px; padding: 40px; border-radius: 24px; background: var(--navy); color: #fff; }
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+.about-grid article { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 20px; }
+.about-grid h3 { margin: 14px 0 8px; }
+.about-grid p { margin: 0; color: #cdd8e7; font-size: 13px; }
+
+.detail-dialog { width: min(650px, calc(100% - 28px)); border: 0; border-radius: 24px; padding: 0; box-shadow: 0 30px 100px rgba(0,0,0,.25); }
+.detail-dialog::backdrop { background: rgba(15, 25, 39, .58); backdrop-filter: blur(4px); }
+.dialog-close { position: absolute; right: 18px; top: 16px; border: 0; background: #eef1f5; width: 36px; height: 36px; border-radius: 50%; font-size: 22px; }
+.dialog-inner { padding: 34px; }
+.dialog-route { font-size: 28px; font-weight: 900; margin: 0 0 6px; }
+.dialog-section { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.factor-list { display: grid; gap: 10px; margin-top: 12px; }
+.factor { display: flex; justify-content: space-between; gap: 12px; border-radius: 10px; background: var(--soft); padding: 10px 12px; font-size: 13px; }
+.official-button { display: inline-flex; margin-top: 20px; padding: 12px 18px; border-radius: 12px; background: var(--navy); color: #fff; text-decoration: none; font-weight: 800; }
+
+footer { border-top: 1px solid var(--line); padding: 28px max(16px, calc((100vw - 1180px) / 2)); color: var(--muted); font-size: 12px; background: #fff; }
+footer p { margin: 4px 0; }
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; }
+  .search-form { grid-template-columns: repeat(2, 1fr); }
+  .flight-card { grid-template-columns: 1fr 1fr; }
+  .availability-box { min-width: 0; }
+  .about-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+  main, .header-inner { width: min(100% - 22px, 1180px); }
+  .hero { padding-top: 45px; }
+  .lead { font-size: 16px; }
+  .search-shell { padding: 20px; border-radius: 18px; }
+  .section-heading, .results-toolbar { align-items: flex-start; flex-direction: column; }
+  .search-form { grid-template-columns: 1fr; }
+  .flight-card { grid-template-columns: 1fr; gap: 16px; padding: 18px; }
+  .detail-button { width: 100%; }
+  .dataset-meta { text-align: left; }
+  .about-section { padding: 24px; }
+  .header-link { display: none; }
+}
